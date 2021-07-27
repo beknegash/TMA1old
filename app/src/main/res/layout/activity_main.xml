@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#958989"
     tools:context=".MainActivity">
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:hint="name">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -18,5 +21,15 @@
             />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="102dp"
+        android:layout_height="123dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="50dp"
+        android:src="@drawable/tmabg"/>
+<!--        app:srcCompat="@drawable/tma"-->
+
 
 </FrameLayout>
