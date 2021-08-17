@@ -8,13 +8,13 @@
     android:gravity="center"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="239dp"
-        android:layout_height="253dp"
+    <ImageButton
+        android:id="@+id/logo"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_gravity="center"
         android:src="@drawable/tmabg"
-        />
+        android:onClick="enter"/>
 
 
 

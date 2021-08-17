@@ -4,4 +4,5 @@
     <string name="first">አዲስ አበባ ትራፊክ ማኔጅመንት ኤጀንሲ</string>
     <string name="name">ስም</string>
     <string name="lang">ቋንቋ</string>
+    <string name="password">የይለፍ ቃል ያስገቡ</string>
 </resources>
