@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">TMA</string>
     <string name="first">Addis Ababa Traffic Management Agency</string>
-    <string name="name">Enter name</string>
-    <string name="password">Enter Password</string>
+    <string name="welcome">Welcome to Addis Ababa Traffic Management Agency</string>
+    <string name="name">Username</string>
+    <string name="password">Password</string>
     <string name="lang">Language</string>
 </resources>

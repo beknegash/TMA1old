@@ -2,7 +2,9 @@
 <resources>
     <string name="app_name">TMA</string>
     <string name="first">አዲስ አበባ ትራፊክ ማኔጅመንት ኤጀንሲ</string>
+    <string name="welcome">እንኳን በ ደህና ወደ አዲስ አበባ ትራፊክ ማኔጅመንት ኤጀንሲ መቱ</string>
     <string name="name">ስም</string>
+    <string name="password">የይለፍ ቃል</string>
     <string name="lang">ቋንቋ</string>
-    <string name="password">የይለፍ ቃል ያስገቡ</string>
+
 </resources>

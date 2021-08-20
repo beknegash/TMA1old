@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageButton;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -17,10 +18,26 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-         Intent intent = getIntent();
+        Intent intent = getIntent();
 
-         username = findViewById(R.id.username);
-         password =  findViewById(R.id.password);
+        ImageButton am = findViewById(R.id.btnam);
+        ImageButton en = findViewById(R.id.btnen);
+
+        ChangeLanguage lang = new ChangeLanguage(this);
+        am.setOnClickListener(view ->
+        {
+            lang.updateResource("am");
+            recreate();
+        });
+
+        en.setOnClickListener(view ->
+        {
+            lang.updateResource("en");
+            recreate();
+        });
+
+//           username = findViewById(R.id.username);
+//         password =  findViewById(R.id.password);
 
     }
 //    private boolean validateUsername() {
