@@ -4,14 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginActivity extends AppCompatActivity {
 
-    TextInputLayout username,password;
+    EditText username,password;
+    Button btnlogin;
+    DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +42,25 @@ public class LoginActivity extends AppCompatActivity {
             recreate();
         });
 
-//           username = findViewById(R.id.username);
-//         password =  findViewById(R.id.password);
+         username = findViewById(R.id.username);
+         password =  findViewById(R.id.password);
+
+         databaseHelper = new DatabaseHelper(LoginActivity.this);
+
+    }
+
+    public void login(View view) {
+
+        boolean isExist = databaseHelper.checkUserExist(username.getText().toString(), password.getText().toString());
+
+        if(isExist){
+            Intent intent = new Intent(LoginActivity.this, OneActivity.class);
+            intent.putExtra("username", username.getText().toString());
+            startActivity(intent);
+        } else {
+            password.setText(null);
+            Toast.makeText(LoginActivity.this, "Login failed. Invalid username or password.", Toast.LENGTH_SHORT).show();
+        }
 
     }
 //    private boolean validateUsername() {

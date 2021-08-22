@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TMA">
         <activity
+            android:name=".OneActivity"
+            android:exported="true" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true" />
         <activity android:name=".MainActivity">

@@ -29,7 +29,7 @@
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text|textCapWords"
+            android:inputType="text"
             />
 
     </LinearLayout>
@@ -48,10 +48,17 @@
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text|textCapWords"
+            android:inputType="numberPassword"
             />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/signin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Signin"
+        android:onClick="login"/>
 
     <LinearLayout
         android:layout_width="match_parent"
