@@ -17,7 +17,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText username,password;
     Button btnlogin;
-    DatabaseHelper databaseHelper;
+    DatabaseHelper myDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +25,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         Intent intent = getIntent();
+
+        myDb = new DatabaseHelper(this);
 
         ImageButton am = findViewById(R.id.btnam);
         ImageButton en = findViewById(R.id.btnen);
@@ -45,22 +47,21 @@ public class LoginActivity extends AppCompatActivity {
          username = findViewById(R.id.username);
          password =  findViewById(R.id.password);
 
-         databaseHelper = new DatabaseHelper(LoginActivity.this);
 
     }
 
     public void login(View view) {
 
-        boolean isExist = databaseHelper.checkUserExist(username.getText().toString(), password.getText().toString());
-
-        if(isExist){
-            Intent intent = new Intent(LoginActivity.this, OneActivity.class);
-            intent.putExtra("username", username.getText().toString());
-            startActivity(intent);
-        } else {
-            password.setText(null);
-            Toast.makeText(LoginActivity.this, "Login failed. Invalid username or password.", Toast.LENGTH_SHORT).show();
-        }
+//        boolean isExist = databaseHelper.checkUserExist(username.getText().toString(), password.getText().toString());
+//
+//        if(isExist){
+//            Intent intent = new Intent(LoginActivity.this, OneActivity.class);
+//            intent.putExtra("username", username.getText().toString());
+//            startActivity(intent);
+//        } else {
+//            password.setText(null);
+//            Toast.makeText(LoginActivity.this, "Login failed. Invalid username or password.", Toast.LENGTH_SHORT).show();
+//        }
 
     }
 //    private boolean validateUsername() {
