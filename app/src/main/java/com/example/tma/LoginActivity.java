@@ -1,32 +1,50 @@
 package com.example.tma;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.widget.NestedScrollView;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
-    EditText username,password;
-    Button btnlogin;
-    DatabaseHelper myDb;
-
+    private final AppCompatActivity activity = LoginActivity.this;
+    private LinearLayout linearLayout;
+    private TextView textInputLayoutEmail;
+    private TextView textInputLayoutPassword;
+    private EditText textInputEditTextEmail;
+    private EditText textInputEditTextPassword;
+    private Button appCompatButtonLogin;
+    private TextView textViewLinkRegister;
+    private InputValidation inputValidation;
+    private DatabaseHelper databaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().hide();
 
         Intent intent = getIntent();
 
-        myDb = new DatabaseHelper(this);
+        initViews();
+        initListeners();
+        initObjects();
+
 
         ImageButton am = findViewById(R.id.btnam);
         ImageButton en = findViewById(R.id.btnen);
@@ -44,68 +62,82 @@ public class LoginActivity extends AppCompatActivity {
             recreate();
         });
 
-         username = findViewById(R.id.username);
-         password =  findViewById(R.id.password);
 
 
-    }
-
-    public void login(View view) {
-
-//        boolean isExist = databaseHelper.checkUserExist(username.getText().toString(), password.getText().toString());
-//
-//        if(isExist){
-//            Intent intent = new Intent(LoginActivity.this, OneActivity.class);
-//            intent.putExtra("username", username.getText().toString());
-//            startActivity(intent);
-//        } else {
-//            password.setText(null);
-//            Toast.makeText(LoginActivity.this, "Login failed. Invalid username or password.", Toast.LENGTH_SHORT).show();
-//        }
 
     }
-//    private boolean validateUsername() {
-//        String val = username.getEditText().getText().toString().trim();
-//        String chekspaces = "\\A\\w{1,20}\\z";
-//
-//        if(val.isEmpty()) {
-//            username.setError("Field can not be empty");
-//            return  false;
-//        }else if(val.length()>20){
-//            username.setError("Username is too large");
-//            return false;
-//        }
-//
-//        else  if(!val.matches(chekspaces)){
-//            username.setError("No white spaces are allowed");
-//            return false;
-//        }
-//        else {
-//            username.setError(null);
-//            username.setErrorEnabled(false);
-//            return true;
-//        }
-//    }
-//    private boolean validatePassword() {
-//        String val = password.getEditText().getText().toString().trim();
-//        String chekspassword = "(?=.*[a-z][A-Z])"+     //any letter
-//                                "(?=\\S+$)"+            //no white space
-//                                ".{4,}"+                //at least 4 chx
-//                                "$";
-//
-//        if(val.isEmpty()) {
-//            password.setError("Field can not be empty");
-//            return  false;
-//        }
-//
-//        else  if(!val.matches(chekspassword)){
-//            password.setError("Password should contain 4 characters");
-//            return false;
-//        }
-//        else {
-//            password.setError(null);
-//            password.setErrorEnabled(false);
-//            return true;
-//        }
-//    }
+    private void initViews() {
+        linearLayout=  findViewById(R.id.nestedScrollView);
+        textInputLayoutEmail =  findViewById(R.id.textInputLayoutEmail);
+        textInputLayoutPassword =  findViewById(R.id.textInputLayoutPassword);
+        textInputEditTextEmail =  findViewById(R.id.textInputEditTextEmail);
+        textInputEditTextPassword =  findViewById(R.id.textInputEditTextPassword);
+        appCompatButtonLogin =  findViewById(R.id.appCompatButtonLogin);
+        textViewLinkRegister =  findViewById(R.id.textViewLinkRegister);
+    }
+    /**
+     * This method is to initialize listeners
+     */
+    private void initListeners() {
+        appCompatButtonLogin.setOnClickListener(this);
+        textViewLinkRegister.setOnClickListener(this);
+    }
+    /**
+     * This method is to initialize objects to be used
+     */
+    private void initObjects() {
+        databaseHelper = new DatabaseHelper(activity);
+        inputValidation = new InputValidation(activity);
+    }
+    /**
+     * This implemented method is to listen the click on view
+     *
+     * @param v
+     */
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.appCompatButtonLogin:
+                verifyFromSQLite();
+                break;
+            case R.id.textViewLinkRegister:
+                // Navigate to RegisterActivity
+                Intent intentRegister = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(intentRegister);
+                break;
+        }
+    }
+    /**
+     * This method is to validate the input text fields and verify login credentials from SQLite
+     */
+    private void verifyFromSQLite() {
+        if (!inputValidation.isInputEditTextFilled(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) {
+            return;
+        }
+        if (!inputValidation.isInputEditTextEmail(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) {
+            return;
+        }
+        if (!inputValidation.isInputEditTextFilled(textInputEditTextPassword, textInputLayoutPassword, getString(R.string.error_message_email))) {
+            return;
+        }
+        if (databaseHelper.checkUser(textInputEditTextEmail.getText().toString().trim()
+                , textInputEditTextPassword.getText().toString().trim())) {
+            Intent accountsIntent = new Intent(activity, UsersListActivity.class);
+            accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
+            emptyInputEditText();
+            startActivity(accountsIntent);
+        } else {
+            // Snack Bar to show success message that record is wrong
+            Snackbar.make(linearLayout, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show();
+        }
+    }
+    /**
+     * This method is to empty all input edit text
+     */
+    private void emptyInputEditText() {
+        textInputEditTextEmail.setText(null);
+        textInputEditTextPassword.setText(null);
+    }
+
+
 }

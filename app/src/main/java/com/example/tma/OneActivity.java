@@ -15,15 +15,15 @@ public class OneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one);
 
-        helloUser = findViewById(R.id.helloUser);
-
-        Intent intent = getIntent();
-
-        Bundle extras = getIntent().getExtras();
-        String username = null;
-        if(extras != null){
-            username = extras.getString("username");
-            helloUser.setText("Welcome " + username);
-       }
+//        helloUser = findViewById(R.id.helloUser);
+//
+//        Intent intent = getIntent();
+//
+//        Bundle extras = getIntent().getExtras();
+//        String username = null;
+//        if(extras != null){
+//            username = extras.getString("username");
+//            helloUser.setText("Welcome " + username);
+      // }
     }
 }

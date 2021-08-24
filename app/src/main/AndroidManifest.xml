@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TMA">
         <activity
+            android:name=".UsersListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="true" />
+        <activity
             android:name=".OneActivity"
             android:exported="true" />
         <activity
