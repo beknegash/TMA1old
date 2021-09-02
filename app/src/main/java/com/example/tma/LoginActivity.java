@@ -25,8 +25,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private final AppCompatActivity activity = LoginActivity.this;
     private LinearLayout linearLayout;
-    private TextView textInputLayoutEmail;
-    private TextView textInputLayoutPassword;
+   // private TextView textInputLayoutEmail;
+   // private TextView textInputLayoutPassword;
     private EditText textInputEditTextEmail;
     private EditText textInputEditTextPassword;
     private Button appCompatButtonLogin;
@@ -68,8 +68,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
     private void initViews() {
         linearLayout=  findViewById(R.id.nestedScrollView);
-        textInputLayoutEmail =  findViewById(R.id.textInputLayoutEmail);
-        textInputLayoutPassword =  findViewById(R.id.textInputLayoutPassword);
+        //textInputLayoutEmail =  findViewById(R.id.textInputLayouttEmail);
+      //  textInputLayoutPassword =  findViewById(R.id.textInputLayoutPassword);
         textInputEditTextEmail =  findViewById(R.id.textInputEditTextEmail);
         textInputEditTextPassword =  findViewById(R.id.textInputEditTextPassword);
         appCompatButtonLogin =  findViewById(R.id.appCompatButtonLogin);
@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.appCompatButtonLogin:
-                verifyFromSQLite();
+               // verifyFromSQLite();
                 break;
             case R.id.textViewLinkRegister:
                 // Navigate to RegisterActivity
@@ -110,27 +110,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     /**
      * This method is to validate the input text fields and verify login credentials from SQLite
      */
-    private void verifyFromSQLite() {
-        if (!inputValidation.isInputEditTextFilled(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) {
-            return;
-        }
-        if (!inputValidation.isInputEditTextEmail(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) {
-            return;
-        }
-        if (!inputValidation.isInputEditTextFilled(textInputEditTextPassword, textInputLayoutPassword, getString(R.string.error_message_email))) {
-            return;
-        }
-        if (databaseHelper.checkUser(textInputEditTextEmail.getText().toString().trim()
-                , textInputEditTextPassword.getText().toString().trim())) {
-            Intent accountsIntent = new Intent(activity, UsersListActivity.class);
-            accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
-            emptyInputEditText();
-            startActivity(accountsIntent);
-        } else {
-            // Snack Bar to show success message that record is wrong
-            Snackbar.make(linearLayout, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show();
-        }
-    }
+   // private void verifyFromSQLite() {
+//        if (!inputValidation.isInputEditTextFilled(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) {
+//            return;
+//        }
+//        if (!inputValidation.isInputEditTextEmail(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) {
+//            return;
+//        }
+//        if (!inputValidation.isInputEditTextFilled(textInputEditTextPassword, textInputLayoutPassword, getString(R.string.error_message_email))) {
+//            return;
+//        }
+//        if (databaseHelper.checkUser(textInputEditTextEmail.getText().toString().trim()
+//                , textInputEditTextPassword.getText().toString().trim())) {
+//            Intent accountsIntent = new Intent(activity, UsersListActivity.class);
+//            accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
+//            emptyInputEditText();
+//            startActivity(accountsIntent);
+//        } else {
+//            // Snack Bar to show success message that record is wrong
+//            Snackbar.make(linearLayout, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show();
+//        }
+//    }
     /**
      * This method is to empty all input edit text
      */
